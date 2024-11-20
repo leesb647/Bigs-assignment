@@ -1,6 +1,5 @@
 'use server'
 
-import { GetPostListResponseSchema } from "@/schemas/board"
 import { ActionResult } from "../../action-result"
 import axios from "axios"
 

@@ -1,7 +1,6 @@
 'use server'
 
 import axios from 'axios'
-import { PostBoardResponseSchema } from "@/schemas/board"
 import { ActionResult } from "../../action-result"
 
 export interface PostBoardProps {

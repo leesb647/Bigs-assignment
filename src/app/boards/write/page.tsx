@@ -6,10 +6,12 @@ import Button from "@/components/styled-button"
 import EditorContainer from "./components/editor-container"
 import { useStores } from "@/store/context"
 import { postBoard } from "@/actions/board/post-board"
+import { useRouter } from "next/navigation"
 
 
 export default function WritePage () {
   const { boardStore, authStore } = useStores()
+  const router = useRouter()
   
   const onClick = async () => {
     try {
@@ -17,6 +19,9 @@ export default function WritePage () {
       if (accessToken != null) {
         const result = await postBoard({accessToken, ...boardStore.board})
         console.log(result)
+        if (result.status === 'success') {
+          router.push(`/boards/${result.data.id}`)
+        }
       }
     } catch (e) {
       console.log(e)

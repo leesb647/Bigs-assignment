@@ -23,25 +23,17 @@ export const postBoard =
         'Access-Control-Allow-Credentials': 'true',
       }
     })
-    console.log(response)
-    // // const result = await response.json()
-
-    // // console.log(result)
-
-    // if (response.ok) {
-    //   console.log('success')
-    //   return {
-    //     status: 'success',
-    //     data: {id:1},
-    //   }
-    // } 
-    // else {
-      console.log('error')
+    
+    if (response.status === 200) {
       return {
-        status: 'error',
-        error: '에러가 발생했습니다.'
+        status: 'success',
+        data: response.data,
       }
-    // }
+    }
+    return {
+      status: 'error',
+      error: '에러가 발생했습니다.'
+    }
   } catch (error) {
     console.log('catch')
     console.log(error)
