@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
+## 시작하기
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install -g pnpm # pnpm 설치
+pnpm install # 의존성 설치
+pnpm run dev # 개발 서버 실행
 ```
+브라우저에서 http://localhost:3000을 주소창에 넣어주세요.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 과제 설명
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# 인증
+접속하게 되면 처음 로그인 창이 보입니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 회원가입
+아이디가 존재하지 않는다면 아래 회원가입 네비게이션을 눌러 회원가입을 해주세요. 완료 시 로그인 창으로 이동합니다.
 
-## Learn More
+# 로그인
+로그인 창에서 회원가입 했던 아이디와 비밀번호를 이용하여 로그인해주세요.
 
-To learn more about Next.js, take a look at the following resources:
+# 리프래시
+로그인을 하면 jwt를 로컬 스토리지에 저장을 해놓고 토큰이 만료되기 전까지 로그인을 유지시킵니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 로그아웃
+로그인을 하면 오른쪽 상단에 로그아웃 버튼이 생깁니다. 버튼을 누를 시 로그아웃이 되고 토큰 정보가 로컬 스토리지에서 삭제됩니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# 게시판
+로그인이 성공적으로 완료됐다면 게시판으로 이동하게 됩니다.
 
-## Deploy on Vercel
+# 글 목록 조회
+게시물을 불러오는데 에러가 나지 않지만 서버에 게시물이 존재하지 않아 빈 배열을 받습니다. 게시물이 어떠한 형태로 나타나는지 보여드리기 위해 임시 임시 데이터를
+넣어주었고 화면에 API로 받은 게시물이 아닌 임시 게시물이 보이게 됩니다. 빈배열을 받지 않는다면 임시 임시 데이터를 보여주는게 아닌 받아온 데이터로 게시물을 보여줍니다.
+하단에는 페이지네이션을 만들었습니다. 페이지를 누름에 따라 쿼리에 잘 전달이 되지만 api를 성공적으로 완수하는지 확인할 수 없었습니다.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 게시판 카테고리
+새 글 작성하기 버튼을 누르면 글을 쓸 수 있는 페이지로 이동하고 가장 먼저 API로 카테고리를 받아와 드랍다운 버튼을 활성화 시켜줍니다.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 글쓰기
+카테고리, 제목, 내용을 입력하고 작성하기 버튼을 눌러주세요.
+
+## 여기서 문제 발생
+이 부분에서 글이 성공적으로 저장이 되어야 하지만, 제가 제대로 구현을 하지 못하였습니다. 그렇기에 글 목록 조회는 성공적으로 완수가 되지만 빈 배열을 받고
+저장된 게시물이 없다 보니 다른 api(글수정, 글삭제, 글조회)가 성공적으로 완료가 되는지 확인할 수 없었습니다. 우선 수정을 제외한 다른 api들은 구현을 모두 해놓은 상태입니다. 죄송합니다.
+왼쪽 상단에 있는 로고를 누르면 게시판 페이지로 이동하게 됩니다.
+
+# 글 조회
+글쓰기를 성공적으로 완료를 했다면 받은 id를 사용하여 글 상세페이지로 이동하게 됩니다. 이 또한 임시 페이지를 어떤 형태로 구현했는지 보여드리고자 임시 데이터를 사용하여 보이게 했습니다.
+다만, 상세 페이지에 있고 api를 불러오는데 성공하지 못하면 지속적인 api콜이 발생하게 되고 이에 오류가 발생하게 됩니다. 글 조회 또한 구현은 했지만 확인을 할 수 없었고 게시물 데이터가 존재하고
+성공적으로 마치게 되면 임시 데이터가 아닌 api를 통해 받은 데이터를 보여주게 했습니다.
+
+# 글삭제 
+글 상세 페이지 오른쪽 상단에는 수정, 삭제 버튼이 존재합니다. 삭제 버튼을 누르면 삭제 api를 실행시키게 구현했습니다. 확인은 할 수 없었습니다.
+
+# 글 수정
+글 수정하기는 제대로 구현하지 못했습니다.
+
+여기까지 저의 과제물에 대한 설명이였습니다. 
+
+좋은 기회를 주셔서 정말 감사합니다.
